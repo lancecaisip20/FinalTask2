@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinalTask2</title>
+<style>
+    .add{
+        display: flex;
+        align-items:first baseline;
+        justify-content:first baseline;
+        flex-direction: column;
+        margin: auto;
+        color: rgb(245, 12, 40);
+    }
+    .buy
+    {
+        width: 30%;
+        border: 1px solid rgb(240, 122, 20);
+        display:block;
+    }
+
+    .main
+    {
+        width: 30%;
+        border: 1px solid rgb(240, 122, 20);
+        display:block;
+        padding: 10px;
+    }
+</style><script>
+    const dSign = "$";
+    const itemPrice = 15.97;
+    let item = 0;
+    function plusSign(){
+        item += 1;
+        document.getElementById("items").value = item;
+        
+        let totalItem = document.getElementById("items").value;
+        document.getElementById("item").innerHTML = "Item" + "("+totalItem+")";
+        document.getElementById("itemTotal").innerHTML = "$" + (itemPrice * item).toFixed(2);
+
+
+        const TotalValue = parseFloat(totalItem) * parseFloat(itemPrice);
+
+        document.getElementById("Shipping").innerHTML = "Shipping and handling: " + dSign + 4.99;
+        document.getElementById("Total").innerHTML = "Total before tax: " + dSign+ TotalValue.toFixed(2);
+        
+        
+        EstimatedTax = (parseFloat(TotalValue) / 100) * 10;
+        document.getElementById("EstimatedTax").innerHTML = "Estimated tax (10%): " + dSign + EstimatedTax.toFixed(2);
+        FinalTotal = parseFloat(TotalValue) + parseFloat(EstimatedTax);
+        document.getElementById("orderTotal").innerHTML = "Order Total: " + dSign + FinalTotal.toFixed(2);
+        }
+    
+        function deducSign(){
+        if(item == 0){
+            item = 0;
+        }else{
+            item -= 1;
+        }
+
+        document.getElementById("items").value = item;
+        
+        let totalItem = document.getElementById("items").value;
+        document.getElementById("item").innerHTML = "Item" + "("+totalItem+")";
+
+        const TotalValue = parseFloat(totalItem) * parseFloat(itemPrice);
+
+        document.getElementById("Shipping").innerHTML = "Shipping and handling: " + dSign + 4.99;
+        document.getElementById("Total").innerHTML = "Total before tax: " + dSign+ TotalValue.toFixed(2);
+        
+        
+        EstimatedTax = (parseFloat(TotalValue) / 100) * 10;
+        document.getElementById("EstimatedTax").innerHTML = "Estimated tax (10%): " + dSign + EstimatedTax.toFixed(2);
+        FinalTotal = parseFloat(TotalValue) + parseFloat(EstimatedTax);
+        document.getElementById("orderTotal").innerHTML = "Order Total: " + dSign + FinalTotal.toFixed(2);
+
+        }
+
+        function order(){
+            document.getElementById("items").innerHTML = "("+item+")";
+        }
+</script></head>
+
+
+
+    <div class="add">
+        <div class="buy" style="padding: 10px;">
+            Items Products: <input type="text" id="items" size="5" value="0">
+            <button onclick="plusSign()">+</button>
+            <button onclick="deducSign()">-</button>
+            <p></p>
+            Shipping and Handling Fee: <input type="text" id="shippingFee" size="5" value="4.99">
+        </div>
+
+        <div class="main">
+            <h2>Order Summary</h2>
+            <p id="item">Items</p><p id="itemTotal" :=""></p>
+            <p id="Shipping">Shipping and handling:</p>
+            <p id="Total">Total before tax:</p>
+            <p id="EstimatedTax">Estimated tax (10%):</p>
+            <p id="orderTotal">Order Total: </p>
+        </div>
+    </div>
+
+</body></html>
